@@ -111,30 +111,30 @@ AFRAME.registerComponent('circles-pickup-object', {
     if ((CONTEXT_AF.el.object3D.position.x < -2) && (CONTEXT_AF.el.object3D.position.z < -5.5)){
 
         if ((CONTEXT_AF.el.object3D.position.x < -14) && (CONTEXT_AF.el.object3D.position.z < -8)){
-          //console.log("new pos 11");
+          console.log("new pos 11");
           thisPos = {x:-16.4, y:1.4, z:-8.8};
         }
         if ((CONTEXT_AF.el.object3D.position.x < -14) && (CONTEXT_AF.el.object3D.position.z < -10)){
-          //console.log("new pos 12");
+          console.log("new pos 12");
           thisPos = {x:-16.4, y:1.4, z:-11.75};
         }
 
         if ((CONTEXT_AF.el.object3D.position.x < -3) && (CONTEXT_AF.el.object3D.position.z < -12)){
-          //console.log("new pos 21");
+          console.log("new pos 21");
           thisPos = {x:-5.5, y:1.4, z:-16.4};
         }
         if ((CONTEXT_AF.el.object3D.position.x < -8) && (CONTEXT_AF.el.object3D.position.z < -12)){
-          //console.log("new pos 22");
+          console.log("new pos 22");
           thisPos = {x:-8.5, y:1.4, z:-16.4};
         }
         if ((CONTEXT_AF.el.object3D.position.x < -10) && (CONTEXT_AF.el.object3D.position.z < -12)){
-          //console.log("new pos 23");
+          console.log("new pos 23");
           thisPos = {x:-11.5, y:1.4, z:-16.4};
         }
         
         if ((CONTEXT_AF.el.object3D.position.x < -14) && (CONTEXT_AF.el.object3D.position.z < -12)){
-          //console.log("here");
-          //console.log("new pos 13");
+          console.log("here");
+          console.log("new pos 13");
           thisPos = {x:-16.4, y:1.4, z:-14.8};
         }
 
