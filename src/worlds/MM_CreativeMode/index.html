@@ -13,16 +13,6 @@
 
     <!-- a-scene with 'circles-properties' component [REQUIRED] -->
     <a-scene circles_scene_properties background="color:#333333;" >
-      
-      <a-entity>
-        <audio id="Narr_sewing_snd" src="artifact01_sewingmachine.mp3" preload="auto"></audio>
-        <audio id="Narr_clock_snd" src="src/worlds/MM_CreativeMode/assets/audio/artifact02_clock.mp3" preload="auto"></audio>
-        <audio id="Narr_LEM_snd" src="src/worlds/MM_CreativeMode/assets/audio/artifact03_LEM.mp3" preload="auto"></audio>
-        <audio id="Narr_telephone_snd" src="src/worlds/MM_CreativeMode/assets/audio/artifact04_telephone.mp3" preload="auto"></audio>
-        <audio id="Narr_computer_snd" src="src/worlds/MM_CreativeMode/assets/audio/artifact05_computer.mp3" preload="auto"></audio>
-        <audio id="Narr_camera_snd" src="src/worlds/MM_CreativeMode/assets/audio/artifact06_camera.mp3" preload="auto"></audio>
-      </a-entity>
-      
 
       <a-camera position="0 1.6 3" rotation="-1 0 0"></a-camera>
       <!-- assets -->
@@ -72,13 +62,12 @@
       <a-entity id="Welcome" position="0.6 2.1 -5.6" scale="1.5 1.5 1.5" rotation="0 0 0" text="value: “Welcome to the Creative Room where you can curate your own exhibit. \nPickup objects off the shelves and place them as you like. \nWhen holding an object, click the information(i) icon to learn more about it!”; color: #fff; width: 4; wrapCount: 65; align: center; tabSize: 4.5; font: /worlds/KIN_Hub/assets/font/BebasNeue-Regular-msdf.json; negate: false; lineHeight: 60"></a-entity>     
 
       <!-- Artifacts -->
-          <a-entity id="singerSewingMachine" sound="src: #Narr_sewing_snd" position="4.2 2.8 -3" rotation="0 0 0" scale="0.6 0.6 0.6"
+          <a-entity id="singerSewingMachine" position="4.2 2.8 -3" rotation="0 0 0" scale="0.6 0.6 0.6"
                     geometry="primitive:octahedron; radius:0.4;"
                     material="color:blue; emissive:green; emissiveIntensity:0.7; metalness:0.3; roughness:0.8;" 
                     gltf-model="#singerSewingMachine_gltf" 
                     circles-pickup-networked
                     circles-artefact="inspectScale:0.6 0.6 0.6; textRotationY:90; inspectRotation:0 -90 0; inspectPosition:0 -0.2 0;
-
                                       labelLookAt:true; descriptionLookAt:true; label_offset:0 1 0; arrow_position:down;
                                       title:Singer Sewing Machine; 
                                       description:This was one of many portable electronic sewing machines developed and released by Singer throughout the early-to-mid 20th century. This model was in use up to the 1970’s. However, Singer continues to build and sell sewing machines, equipment and attachments to this day.;                                      
@@ -86,80 +75,70 @@
                                       description_back: ;
                                       label_text:Singer Sewing Machine;
                                       audio:#Narr_sewing_snd; volume:0.4;"
-
                     shadow="receive:false; cast:false;"></a-entity>
-          <a-entity id="CPUTerminal" sound="src: #Narr_computer_snd" position="4.5 2.8 -1" rotation="0 -90 0"
+          <a-entity id="CPUTerminal" position="4.5 2.8 -1" rotation="0 -90 0"
                     geometry="primitive:octahedron; radius:0.4;"
                     material="color:blue; emissive:green; emissiveIntensity:0.7; metalness:0.3; roughness:0.8;" 
                     gltf-model="#CPUTerminal_gltf"
                     circles-pickup-networked
                     circles-artefact="inspectScale:1.2 1.2 1.2; textRotationY:90; inspectRotation:0 0 0; inspectPosition:0 -0.4 0;
-
                                       labelLookAt:true; descriptionLookAt:true; label_offset:0 1 0; arrow_position:down;
                                       title:CPU Terminal pt.1; 
                                       description:Nabu was an unsuccessful attempt to break into the newly-developing personal computer market in the 1980’s, starting up in Ottawa, Ontario in the hopes of expanding across the country.;
                                       title_back:CPU Terminal pt.2;
                                       description_back:However, the company failed due to difficulties acquiring software from external companies and an unsubstantial customer base.;
-
                                       label_text:CPU Terminal;
                                       audio:#Narr_computer_snd; volume:0.4;"
                     shadow="cast:true; receive:true;"></a-entity>
-            <a-entity id="clock" position="4 2.8 1" sound="src: #Narr_clock_snd" rotation="0 0 0"
+            <a-entity id="clock" position="4 2.8 1" rotation="0 0 0"
                       geometry="primitive:octahedron; radius:0.4;"
                       material="color:blue; emissive:green; emissiveIntensity:0.7; metalness:0.3; roughness:0.8;" 
                       gltf-model="#clock_gltf"
                       circles-pickup-networked
                       circles-artefact="inspectScale:1.2 1.2 1.2; textRotationY:90; inspectRotation:0 0 0; inspectPosition:0 -0.4 0;
-
                                         labelLookAt:true; descriptionLookAt:true; label_offset:0 0.8 0; arrow_position:down;
                                         title:Clock pt.1; 
                                         description: A standard analog clock seen in households from the 1900’s to the 1940’s. Pequegnat Arthur Clock Co. was the first mass-production clock company in Canada, founded in 1904 in Kitchener, Ontario. The company flourished until the early 1940’s, ceasing production in 1943 and finally dissolving in 1964.;
                                         title_back:Clock pt.2;
                                         description_back:Today, Pequegnat clocks are sought after by collectors across Canada.;
-
                                         label_text:Clock;
                                         audio:#Narr_clock_snd; volume:0.4;"
                       shadow="cast:true; receive:true;"></a-entity>
 
-          <a-entity id="lemWood"  sound="src: #Narr_LEM_snd" position="4.3 1.2 0.5" rotation="0 -90 0"
+          <a-entity id="lemWood" position="4.3 1.2 0.5" rotation="0 -90 0"
                     geometry="primitive:octahedron; radius:0.4;"
                     material="color:blue; emissive:green; emissiveIntensity:0.7; metalness:0.3; roughness:0.8;" 
                     gltf-model="#lemWood_gltf" 
                     circles-pickup-networked
                     circles-artefact="inspectScale:1.2 1.2 1.2; textRotationY:90; inspectRotation:0 0 0; inspectPosition:0 0 0;
-
                                       labelLookAt:true; descriptionLookAt:true; label_offset:0 0.8 0; arrow_position:down;
                                       title:Lunar Excursion Module, Wood Model pt.1; 
                                       description:\nDuring the Apollo Program, NASA commissioned multiple aerospace engineering companies for LEM (Lunar Excursion Model) development. Of the nine companies that were requested, Grumman Aircraft Engineering created the model that was ultimately accepted.;  
                                       title_back:Lunar Excursion Module, Wood Model pt.2;
                                       description_back:\nThis wooden model is a representation of a prototype design, which was iterated upon until NASA arrived at the final LEM used in the mission.;
                                       label_text:Lunar Excursion Module, Wood Model;
-
                                       audio:#Narr_LEM_snd; volume:0.4;"
                     shadow="receive:false; cast:false;"></a-entity>  
-          <a-entity id="majesticCamera" sound="src: #Narr_camera_snd"  position="4.2 1.2 -1" rotation="0 -90 0"
+          <a-entity id="majesticCamera" position="4.2 1.2 -1" rotation="0 -90 0"
                     geometry="primitive:octahedron; radius:0.4;"
                     material="color:blue; emissive:green; emissiveIntensity:0.7; metalness:0.3; roughness:0.8;" 
                     gltf-model="#majesticCamera_gltf"
                     circles-pickup-networked
                     circles-artefact="inspectScale:1.2 1.2 1.2; textRotationY:90; inspectRotation:0 0 0; inspectPosition:0 -0.2 0;
-
                                       labelLookAt:true; descriptionLookAt:true; label_offset:0 0.6 0; arrow_position:down;
                                       title:Majestic Casette Camera pt.1; 
                                       description:\nCameras like this were sold for home photography and stored photos on mini-casette tape. While the exact date and manufacturer of this particular model is unknown, it can be estimated to be mid-20th century based on its compact, if primitive, design.;
                                       title_back:Majestic Casette Camera pt.2;
                                       description_back:\nCassettes were replaced with mini-DV and mini-DVD in the 1990’s.;
-
                                       label_text:Majestic Casette Camera;
                                       audio:#Narr_camera_snd; volume:0.4;"
                     shadow="cast:true; receive:true;"></a-entity>
-          <a-entity id="northernElectricsTelephone" sound="src: #Narr_telephone_snd"  position="4.3 1.2 -3" rotation="0 -90 0"
+          <a-entity id="northernElectricsTelephone" position="4.3 1.2 -3" rotation="0 -90 0"
                     geometry="primitive:octahedron; radius:0.4;"
                     material="color:blue; emissive:green; emissiveIntensity:0.7; metalness:0.3; roughness:0.8;" 
                     gltf-model="#northernElectronicsTelephone_gltf"
                     circles-pickup-networked
                     circles-artefact="inspectScale:1.2 1.2 1.2; textRotationY:90; inspectRotation:0 0 0; inspectPosition:0 -0.2 0;
-
                                       labelLookAt:true; descriptionLookAt:true; label_offset:0 0.8 0; arrow_position:down;
                                       title:Telephone; 
                                       description:This is a wired rotary telephone that was standard in the mid-20th century. The company, Northern Electric, was one of the original standards of telecommunication companies in North America until the 1960’s, when it was bought out by Bell Canada. This particular model was found in Montreal, Quebec.;
@@ -167,7 +146,6 @@
                                       description_back:Artifact #: 1978.0123.001 \nDate: 1951 \nManufacturer: Northern Electric Co. Ltd. of Canada;
                                       label_text:Northern Electric Telephone;
                                       audio:#Narr_telephone_snd; volume:0.4;"
-
                     shadow="cast:true; receive:true;"></a-entity>
 
       <!-- Back to hub -->
