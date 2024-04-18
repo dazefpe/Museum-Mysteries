@@ -3,7 +3,7 @@
 AFRAME.registerComponent('circles-pickup-object', {
   schema: {
     pickupPosition:     { type: "vec3", default:{x:0.0, y:0.0, z:0.0} },   //where do we want this relative to the camera
-    pickupRotation:     { type: "vec3", default:{x:0.0, y:0.0, z:0.0} },   //what orientation relative to the camera
+    pickupRotation:     { type: "vec3", default:{x:0.0, y:0.0, z:0.0} },   //what orientation relative to teh camera
     pickupScale:        { type: "vec3", default:{x:1.0, y:1.0, z:1.0} },   //what scale relative to the camera
     dropPosition:       { type: "vec3", default:{x:100001.0, y:0.0, z:0.0} },   //where do we want this to end up after it is released
     dropRotation:       { type: "vec3", default:{x:100001.0, y:0.0, z:0.0} },   //where do we want this to orient as after it is released
@@ -100,23 +100,58 @@ AFRAME.registerComponent('circles-pickup-object', {
       //send off event for others
       CONTEXT_AF.el.emit(CIRCLES.EVENTS.RELEASE_THIS_OBJECT, {sendNetworkEvent:sendNetworkEvent}, true);
       CIRCLES.getCirclesManagerElement().emit(CIRCLES.EVENTS.RELEASE_THIS_OBJECT, {el:CONTEXT_AF.el}, false);
-      if (data.animate === true) {
-        CONTEXT_AF.el.removeEventListener('animationcomplete__cpo_position', releaseEventFunc);
-      }
     };
-    if (data.animate === true) {
-      CONTEXT_AF.el.addEventListener('animationcomplete__cpo_position', releaseEventFunc);
-    }
-    else {
+    if (data.animate === false) {
       releaseEventFunc();
     }
 
-    const thisPos = {x:CONTEXT_AF.el.object3D.position.x, y:CONTEXT_AF.el.object3D.position.y, z:CONTEXT_AF.el.object3D.position.z};
-    const thisRot = {x:THREE.MathUtils.radToDeg(CONTEXT_AF.el.object3D.rotation.x), y:THREE.MathUtils.radToDeg(CONTEXT_AF.el.object3D.rotation.y), z:THREE.MathUtils.radToDeg(CONTEXT_AF.el.object3D.rotation.z)};
+    //----------------------------------------------------------------------------------------------
+    //dropPos
+    var thisPos = {x:0, y:0, z:0};  
+    if ((CONTEXT_AF.el.object3D.position.x < -2) && (CONTEXT_AF.el.object3D.position.z < -5.5)){
+
+        if ((CONTEXT_AF.el.object3D.position.x < -14) && (CONTEXT_AF.el.object3D.position.z < -8)){
+          console.log("new pos 11");
+          thisPos = {x:-16.4, y:1.4, z:-8.8};
+        }
+        if ((CONTEXT_AF.el.object3D.position.x < -14) && (CONTEXT_AF.el.object3D.position.z < -10)){
+          console.log("new pos 12");
+          thisPos = {x:-16.4, y:1.4, z:-11.75};
+        }
+
+        if ((CONTEXT_AF.el.object3D.position.x < -3) && (CONTEXT_AF.el.object3D.position.z < -12)){
+          console.log("new pos 21");
+          thisPos = {x:-5.5, y:1.4, z:-16.4};
+        }
+        if ((CONTEXT_AF.el.object3D.position.x < -8) && (CONTEXT_AF.el.object3D.position.z < -12)){
+          console.log("new pos 22");
+          thisPos = {x:-8.5, y:1.4, z:-16.4};
+        }
+        if ((CONTEXT_AF.el.object3D.position.x < -10) && (CONTEXT_AF.el.object3D.position.z < -12)){
+          console.log("new pos 23");
+          thisPos = {x:-11.5, y:1.4, z:-16.4};
+        }
+        
+        if ((CONTEXT_AF.el.object3D.position.x < -14) && (CONTEXT_AF.el.object3D.position.z < -12)){
+          console.log("here");
+          console.log("new pos 13");
+          thisPos = {x:-16.4, y:1.4, z:-14.8};
+        }
+
+    }
+    else{ //obj go back to orig pos in storage room
+      thisPos = {x:data.dropPosition.x, y:data.dropPosition.y, z:data.dropPosition.z};  
+      console.log("orig new pos");
+    }
+
+
+
+
+    const thisRot = {x:0, y:THREE.MathUtils.radToDeg(CONTEXT_AF.el.object3D.rotation.y), z:0};
     const thisSca = {x:CONTEXT_AF.el.object3D.scale.x, y:CONTEXT_AF.el.object3D.scale.y, z:CONTEXT_AF.el.object3D.scale.z};
 
-    const dropPos  = (data.dropPosition.x < 100001.0) ? {x:data.dropPosition.x, y:data.dropPosition.y, z:data.dropPosition.z} : thisPos;
-    const dropRot  = (data.dropRotation.x < 100001.0) ? {x:data.dropRotation.x, y:data.dropRotation.y, z:data.dropRotation.z} : thisRot;
+    const dropPos  = thisPos;
+    const dropRot  = thisRot;
     const dropSca  = (data.dropScale.x < 100001.0) ? {x:data.dropScale.x, y:data.dropScale.y, z:data.dropScale.z} : thisSca;
 
     //set drop transforms, if any
@@ -138,14 +173,20 @@ AFRAME.registerComponent('circles-pickup-object', {
 
     //sending a "pre" event to turn off controls before any animations might be done
     CONTEXT_AF.el.emit(CIRCLES.EVENTS.RELEASE_THIS_OBJECT_PRE, null, true);
+    //let others know
+    CONTEXT_AF.el.emit(CIRCLES.EVENTS.RELEASE_THIS_OBJECT, {sendNetworkEvent:sendNetworkEvent}, true);
+    //CIRCLES.getCirclesManagerElement().emit(CIRCLES.EVENTS.PICKUP_THIS_OBJECT, {el:CONTEXT_AF.el}, false);
   },
   clickFunc : function(e) {
+    console.log("clickFunction?")
     const CONTEXT_AF = (e) ? e.srcElement.components['circles-pickup-object'] : this;
     if (CONTEXT_AF.pickedUp === true) {
       CONTEXT_AF.release(true, CONTEXT_AF);
+      console.log("clickFunction01")
     }
     else {
       CONTEXT_AF.pickup(true, CONTEXT_AF);
+      console.log("clickFunction02")
     }
   }
 });
