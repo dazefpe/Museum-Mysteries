@@ -12,6 +12,7 @@
     <script src="/worlds/KIN_FreeFall/scripts/experiment-functions.js"></script>
 
 
+
   </head>
 
   <body onload="setup()">
@@ -20,6 +21,9 @@
 
     <!-- a-scene with 'circles-properties' component [REQUIRED] -->
     <a-scene circles_scene_properties>
+
+
+
 
       <a-camera position="0 1.6 0" rotation="0 0 0"></a-camera>
       <!-- assets -->
@@ -61,30 +65,16 @@
       <!-- Circles' built-in manager and avatar [REQUIRED] -->
       <circles-manager-avatar/>
 
-      <!-- models -->
-      <a-entity gltf-model="#CPUTerminal_gltf" 
-                position="-2.8 1 9" rotation="0 -90 0"
-                shadow="cast:true; receive:true;"></a-entity>
-      <a-entity id="phone"
-                gltf-model="#northernElectronicsTelephone_gltf"
-                position="9.5 1 6"
-                circles-pickup-networked
-                circles-artefact="inspectScale:1.2 1.2 1.2; textRotationY:0; inspectRotation:0 0 0; inspectPosition:0 -0.2 0;
-                                  label_offset:0 0.6 0; arrow_position:down;
-                                  title:Tools Unfamiliarity; 
-                                  description:'Walking into the lab the first day was exhilarating and terrifying. I’m excited to learn and get comfortable with the tools. But, it's next to impossible when I'm always paired with someone who takes over. I was never exposed to these tools as a child growing up.'';
-                                  title_back:Group Work;
-                                  description_back:Men usually go into tech. with a better understanding of tools such as this drill. However, women may not have had the same exposure. Though with positive intentions men taking over exercises with unfamiliar tools prevents women from learning.;
-                                  label_text:Pickup Telephone;
-                                  audio:#Narr_welcome; volume:0.4;"
-                shadow="cast:true; receive:true;"></a-entity>  
-      <a-entity obj-model="obj: #arm_obj; mtl: #arm_mtl"
-                position="-20 0.05 -1.7"
-                shadow="cast:true; receive:true;"></a-entity>
-                
-                
-      <a-entity id="placeholdes">  
+      
+        <!-- PASSCODE -->
+        <a-entity id="passcodeInput" position="-3 1 -10.75" rotation="0 0 0" scale="1 1 1" text="value: Enter Passcode; color: #fff; width: 1.5; align: center; wrapCount: 15"></a-entity>
+        <a-entity id="passcodeCursor" position="-3 1 -10.75" rotation="0 0 0" scale="1 1 1" text="value: |; color: #fff; width: 1.5; align: center;"></a-entity>
+
         
+      
+        
+      <a-entity id="placeholdes">  
+      
         <!-- BEAKERS -->
         <a-entity id="beaker1"
                     position="0 1.5 -12" rotation="0 0 0" scale="0.3 0.3 0.3"
@@ -92,12 +82,8 @@
                     material="color: #00FFFF; transparent: true; opacity: 0.8;"
                    
                     circles-artefact="inspectPosition:0 0 0; inspectRotation:0 0 0; inspectScale:0.8 0.8 0.8;
-                                      textRotationY:90.0; labelLookAt:true; descriptionLookAt:true; label_offset:0.0 1.0 0.0; arrow_position:down;
-                                      title:[~20-25 chars] Title Front;
-                                      description:[~240-280 chars]  This is the FRONT text that will display when an object is picked up. Adjust scale size and text rotation properties to make more visible.;
-                                      title_back:[~20-25 chars] Title Back;
-                                      description_back:[~240-280 chars] This is the back/secondary text that will display when you rotate the description bubble.;
-                                      label_text:Placeholder: Beaker Puzzle Object;"
+                                      textRotationY:90.0; labelLookAt:true; label_offset:0.0 1.0 0.0;  arrow_position:down;
+                                      label_text: Hydrogen ;"
                     circles-pickup-networked></a-entity>    
         <a-entity id="beaker2"
                     position="-2 1.5 -12" rotation="0 0 0" scale="0.3 0.3 0.3"
@@ -105,12 +91,8 @@
                     material="color: #FF0000; transparent: true; opacity: 0.8;"
                      
                     circles-artefact="inspectPosition:0 0 0; inspectRotation:0 0 0; inspectScale:0.8 0.8 0.8;
-                                      textRotationY:90.0; labelLookAt:true; descriptionLookAt:true; label_offset:0.0 1.0 0.0; arrow_position:down;
-                                      title:[~20-25 chars] Title Front;
-                                      description:[~240-280 chars]  This is the FRONT text that will display when an object is picked up. Adjust scale size and text rotation properties to make more visible.;
-                                      title_back:[~20-25 chars] Title Back;
-                                      description_back:[~240-280 chars] This is the back/secondary text that will display when you rotate the description bubble.;
-                                      label_text:Placeholder: Beaker Puzzle Object;"
+                    textRotationY:90.0; labelLookAt:true; label_offset:0.0 1.0 0.0;  arrow_position:down;
+                    label_text: Oxygen ;"
                     circles-pickup-networked></a-entity> 
         <a-entity id="beaker3"
                     position="2 1.5 -12" rotation="0 0 0" scale="0.3 0.3 0.3"
@@ -118,15 +100,12 @@
                     material="color: #0000FF; transparent: true; opacity: 0.8;"
                     
                     circles-artefact="inspectPosition:0 0 0; inspectRotation:0 0 0; inspectScale:0.8 0.8 0.8;
-                                      textRotationY:90.0; labelLookAt:true; descriptionLookAt:true; label_offset:0.0 1.0 0.0; arrow_position:down;
-                                      title:[~20-25 chars] Title Front;
-                                      description:[~240-280 chars]  This is the FRONT text that will display when an object is picked up. Adjust scale size and text rotation properties to make more visible.;
-                                      title_back:[~20-25 chars] Title Back;
-                                      description_back:[~240-280 chars] This is the back/secondary text that will display when you rotate the description bubble.;
-                                      label_text:Placeholder: Beaker Puzzle Object;"
+                    label_offset:0.0 1.0 0.0;  arrow_position:down;
+                    label_text: Nitrogen;"
                     circles-pickup-networked></a-entity>  
         
-
+      
+                
 
 
         <a-entity id="artefact-sewingMachine"
@@ -331,9 +310,39 @@ document.getElementById('beaker2').setAttribute('pickup-listener', '');
 document.getElementById('beaker3').setAttribute('pickup-listener', '');
 
 
-              });
+ });
 
-     
+//COMPUTER PUZZLE
+document.addEventListener('keydown', function(event) {
+          var passcode = "INNOVATE"; // Define your passcode here
+          var inputText = document.querySelector('#passcodeInput').getAttribute('text').value;
+          if (event.key !== "Enter") {
+            // Append characters to passcode until Enter is pressed
+            if (event.key === "Backspace") {
+              passcode = inputText.slice(0, -1);
+            } else {
+              passcode = inputText + event.key;
+            }
+          } else {
+            // Check if the entered passcode is correct
+            if (inputText === passcode) {
+              
+              alert("Congratulations! You've entered the correct passcode.");
+            } else {
+              // Incorrect passcode, reset input field
+              alert("Incorrect passcode. Please try again.");
+              document.querySelector('#passcodeInput').setAttribute('text', 'value: Enter Passcode; color: #fff; width: 1.5; align: center; wrapCount: 15');
+              passcode = "";
+            }
+          }
+          // Update passcode input field text
+          document.querySelector('#passcodeInput').setAttribute('text', 'value', passcode);
+          // Update cursor position
+          var cursorPosition = passcode.length + 0.75;
+          document.querySelector('#passcodeCursor').setAttribute('position', cursorPosition + ' 1.5 -5');
+        });
+
+
 
         </script>
 
