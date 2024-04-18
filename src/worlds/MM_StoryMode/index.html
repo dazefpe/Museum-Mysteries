@@ -139,17 +139,27 @@
                     animation__mouseleave="property:material.color; type:color; to:#FFD637; startEvents:mouseleave; dur:200"
                     animation__click="property:geometry.radius; from:0.04; to:0; startEvents:click; dur:300"></a-entity>    
           </a-entity>          
-        <a-entity id="artefact-gem"
+        <a-entity id="artefact-LEMwood"
                     position="-3 1 -8.75" rotation="0 0 0" scale="1 1 1"
                     geometry="primitive:octahedron; radius:0.5;"
                     material="color:blue; emissive:green; emissiveIntensity:0.7; metalness:0.3; roughness:0.8;" 
                     gltf-model="#lemWood_gltf"></a-entity> 
-        <a-entity id="artefact-gem"
+        <a-entity id="artefact-clock"
                     position="-3 1 -9.75" rotation="0 0 0" scale="1 1 1"
                     geometry="primitive:octahedron; radius:0.5;"
                     material="color:blue; emissive:green; emissiveIntensity:0.7; metalness:0.3; roughness:0.8;" 
                     gltf-model="#clock_gltf"
                     ></a-entity> 
+        <a-entity id="artefact-cleaningHint"
+                  position="-3 1.5 -5.5" rotation="0 0 0" scale="1 1 1"
+                  geometry="primitive:octahedron; radius:0.25;"
+                  material="color:blue; emissive:green; emissiveIntensity:0.7; metalness:0.3; roughness:0.8;" 
+                  circles-artefact="inspectPosition:0 0 0; inspectRotation:0 0 0; inspectScale:0.8 0.8 0.8;
+                                    textRotationY:90.0; labelLookAt:true; descriptionLookAt:true; label_offset:0.0 1.0 0.0; arrow_position:down;
+                                    description:Click on the coloured spheres to clean them off the artifacts;
+                                    description_back:You have xx spots left to clean;
+                                    label_text:Hint;"
+                  circles-pickup-networked></a-entity>  
         </a-entity>
       
       <!-- Text -->
@@ -201,6 +211,7 @@
         <script src="/socket.io/socket.io.js"></script>
         <script>
           var isClean = 0;
+          var leftToClean = 15;
           console.log(isClean);
             const socket = io();
 
@@ -212,6 +223,8 @@
                     isClean++;
                     console.log(isClean);
 
+                    document.querySelector('#artefact-cleaningHint').setAttribute('description_back', "You have spots left to clean;");
+
                     if(isClean > 1){
                       console.log("cleaningFinished!");
                       document.querySelector('#hint01_img').setAttribute('visible', true);
@@ -222,6 +235,8 @@
                     isClean++;
                     console.log(isClean);
                     
+                    document.querySelector('#artefact-cleaningHint').setAttribute('description_back', "You have spots left to clean;");
+
                     if(isClean > 1){
                       console.log("cleaningFinished!");
                       document.querySelector('#hint01_img').setAttribute('visible', true);
