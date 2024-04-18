@@ -69,11 +69,9 @@
         <!-- PASSCODE -->
         <a-entity id="passcodeInput" position="-3 1 -10.75" rotation="0 0 0" scale="1 1 1" text="value: Enter Passcode; color: #fff; width: 1.5; align: center; wrapCount: 15"></a-entity>
         <a-entity id="passcodeCursor" position="-3 1 -10.75" rotation="0 0 0" scale="1 1 1" text="value: |; color: #fff; width: 1.5; align: center;"></a-entity>
-
-        
       
         
-      <a-entity id="placeholdes">  
+      <a-entity id="placeholders">  
       
         <!-- BEAKERS -->
         <a-entity id="beaker1"
@@ -314,33 +312,41 @@ document.getElementById('beaker3').setAttribute('pickup-listener', '');
 
 //COMPUTER PUZZLE
 document.addEventListener('keydown', function(event) {
-          var passcode = "INNOVATE"; // Define your passcode here
-          var inputText = document.querySelector('#passcodeInput').getAttribute('text').value;
-          if (event.key !== "Enter") {
-            // Append characters to passcode until Enter is pressed
-            if (event.key === "Backspace") {
-              passcode = inputText.slice(0, -1);
-            } else {
-              passcode = inputText + event.key;
-            }
-          } else {
-            // Check if the entered passcode is correct
-            if (inputText === passcode) {
-              
-              alert("Congratulations! You've entered the correct passcode.");
-            } else {
-              // Incorrect passcode, reset input field
-              alert("Incorrect passcode. Please try again.");
-              document.querySelector('#passcodeInput').setAttribute('text', 'value: Enter Passcode; color: #fff; width: 1.5; align: center; wrapCount: 15');
-              passcode = "";
-            }
-          }
-          // Update passcode input field text
-          document.querySelector('#passcodeInput').setAttribute('text', 'value', passcode);
-          // Update cursor position
-          var cursorPosition = passcode.length + 0.75;
-          document.querySelector('#passcodeCursor').setAttribute('position', cursorPosition + ' 1.5 -5');
-        });
+  var passcode = "INNOVATE"; // Define your passcode here
+  var inputText = document.querySelector('#passcodeInput').getAttribute('text').value;
+  
+  
+  // Ignore non-alphanumeric keys except for Backspace
+  if (!event.key.match(/^[a-zA-Z0-9]$/) && event.key !== "Backspace" && event.key !== "Enter") {
+    return;
+  }
+  
+  if (event.key !== "Enter") {
+    // Append characters to passcode until Enter is pressed
+    if (event.key === "Backspace") {
+      passcode = inputText.slice(0, -1);
+    } else {
+      passcode = inputText + event.key;
+    }
+  } else {
+    // Check if the entered passcode is correct
+    if (inputText === passcode) {
+      alert("Congratulations! You've entered the correct passcode.");
+    } else {
+      // Incorrect passcode, reset input field
+      alert("Incorrect passcode. Please try again.");
+      document.querySelector('#passcodeInput').setAttribute('text', 'value: Enter Passcode; color: #fff; width: 1.5; align: center; wrapCount: 15');
+      passcode = "";
+    }
+  }
+  
+  // Update passcode input field text
+  document.querySelector('#passcodeInput').setAttribute('text', 'value', passcode);
+  
+  // Update cursor position
+  var cursorPositionX = passcode.length + 0.75;
+  document.querySelector('#passcodeCursor').setAttribute('position', cursorPositionX + ' ' + cursorPositionY + ' -5');
+});
 
 
 
