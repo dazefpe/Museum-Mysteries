@@ -67,7 +67,7 @@
                 gltf-model="#northernElectronicsTelephone_gltf"
                 position="1.9 1 -0.9" rotation="0 -90 0"
                 circles-pickup-networked
-                circles-artefact="inspectScale:1.2 1.2 1.2; textRotationY:0; inspectRotation:0 0 0; inspectPosition:0 -0.2 0;
+                circles-artefact="inspectScale:1.2 1.2 1.2; textRotationY:90; inspectRotation:0 0 0; inspectPosition:0 -0.2 0;
                                   label_offset:0 0.6 0; arrow_position:down;
                                   title:Tools Unfamiliarity; 
                                   description:'Walking into the lab the first day was exhilarating and terrifying. I’m excited to learn and get comfortable with the tools. But, it's next to impossible when I'm always paired with someone who takes over. I was never exposed to these tools as a child growing up.'';
@@ -223,7 +223,7 @@
                     isClean++;
                     console.log(isClean);
 
-                    document.querySelector('#artefact-cleaningHint').setAttribute('description_back', "You have spots left to clean;");
+                    document.querySelector('#artefact-cleaningHint').setAttribute('description_back', "description_back: You have spots left to clean");
 
                     if(isClean > 1){
                       console.log("cleaningFinished!");
@@ -235,7 +235,7 @@
                     isClean++;
                     console.log(isClean);
                     
-                    document.querySelector('#artefact-cleaningHint').setAttribute('description_back', "You have spots left to clean;");
+                    document.querySelector('#artefact-cleaningHint').setAttribute('description_back', "description_back: You have spots left to clean");
 
                     if(isClean > 1){
                       console.log("cleaningFinished!");
