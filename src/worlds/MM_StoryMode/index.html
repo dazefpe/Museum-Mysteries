@@ -12,6 +12,7 @@
     <script src="/worlds/KIN_FreeFall/scripts/experiment-functions.js"></script>
 
 
+
   </head>
 
   <body onload="setup()">
@@ -21,6 +22,7 @@
     <!-- a-scene with 'circles-properties' component [REQUIRED] -->
     <a-scene circles_scene_properties>
 
+   
       <a-camera position="0 1.6 0" rotation="0 0 0"></a-camera>
       <!-- assets -->
       <a-assets timeout="10000">
@@ -61,10 +63,10 @@
       <!-- Circles' built-in manager and avatar [REQUIRED] -->
       <circles-manager-avatar/>
 
-      
+      <!--PUZZLE ENTITIES-->
         <!-- PASSCODE -->
-        <a-entity id="passcodeInput" position="-3 1 -10.75" rotation="0 0 0" scale="1 1 1" text="value: Enter Passcode; color: #fff; width: 1.5; align: center; wrapCount: 15"></a-entity>
-        <a-entity id="passcodeCursor" position="-3 1 -10.75" rotation="0 0 0" scale="1 1 1" text="value: |; color: #fff; width: 1.5; align: center;"></a-entity>
+        <a-entity id="passcodeInput" click-log position="-3 1 -10.75" rotation="0 0 0" scale="1 1 1" text="value: Enter Passcode; color: #fff; width: 1.5; align: center; wrapCount: 15"></a-entity>
+        <a-entity id="passcodeCursor" click-log position="-3 1 -10.75" rotation="0 0 0" scale="1 1 1" text="value: |; color: #fff; width: 1.5; align: center;"></a-entity>
         
       
         
@@ -356,6 +358,19 @@ document.addEventListener('keydown', function(event) {
   document.querySelector('#passcodeCursor').setAttribute('position', cursorPositionX + ' ' + cursorPositionY + ' -5');
 });
 
+AFRAME.registerComponent("click-log", {
+        init: function() {
+          this.myFunction = function() {
+            console.log("hi");
+          };
+
+          this.el.addEventListener("click", this.myFunction);
+        },
+
+        remove: function() {
+          this.el.removeEventListener("click", this.myFunction);
+        }
+      });
 
 
         </script>
