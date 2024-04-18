@@ -61,6 +61,42 @@
       <!-- Circles' built-in manager and avatar [REQUIRED] -->
       <circles-manager-avatar/>
 
+      
+
+  <!-- BEAKERS -->
+        <a-entity id="beaker1"
+                    position="0 1.5 -12" rotation="0 0 0" scale="0.3 0.3 0.3"
+                    geometry="primitive:cylinder; radiusTop: 0.3; radiusBottom: 0.4; height: 1.2; segmentsRadial: 20; openEnded: false;"
+                    material="color: #FFFFFF; transparent: true; opacity: 0.8;"
+                   
+                    circles-artefact="inspectPosition:0 0 0; inspectRotation:0 0 0; inspectScale:0.8 0.8 0.8;
+                                      textRotationY:90.0; labelLookAt:true; label_offset:0.0 1.0 0.0;  arrow_position:down;
+                                      label_text: Hydrogen ;"
+                    circles-pickup-networked></a-entity>    
+        <a-entity id="beaker2"
+                    position="-2 1.5 -12" rotation="0 0 0" scale="0.3 0.3 0.3"
+                    geometry="primitive:cylinder; radiusTop: 0.3; radiusBottom: 0.4; height: 1.2; segmentsRadial: 20; openEnded: false;"
+                    material="color: #FF0000; transparent: true; opacity: 0.8;"
+                     
+                    circles-artefact="inspectPosition:0 0 0; inspectRotation:0 0 0; inspectScale:0.8 0.8 0.8;
+                    textRotationY:90.0; labelLookAt:true; label_offset:0.0 1.0 0.0;  arrow_position:down;
+                    label_text: Oxygen ;"
+                    circles-pickup-networked></a-entity>
+        <a-entity id="beaker3"
+                    position="2 1.5 -12" rotation="0 0 0" scale="0.3 0.3 0.3"
+                    geometry="primitive:cylinder; radiusTop: 0.3; radiusBottom: 0.4; height: 1.2; segmentsRadial: 20; openEnded: false;"
+                    material="color: blue; transparent: true; opacity: 0.8;"
+                   
+                    circles-artefact="inspectPosition:0 0 0; inspectRotation:0 0 0; inspectScale:0.8 0.8 0.8;
+                    label_offset:0.0 1.0 0.0;  arrow_position:down;
+                    label_text: Nitrogen;"
+                    circles-pickup-networked></a-entity>  
+        <!--PUZZLE ENTITIES-->
+        <!-- PASSCODE -->
+        <a-entity id="passcodeInput" click-log position="-3 1 -10.75" rotation="0 0 0" scale="1 1 1" text="value: Enter Passcode; color: #fff; width: 1.5; align: center; wrapCount: 15"></a-entity>
+        <a-entity id="passcodeCursor" click-log position="-3 1 -10.75" rotation="0 0 0" scale="1 1 1" text="value: |; color: #fff; width: 1.5; align: center;"></a-entity>
+
+
       <!-- models -->
       <a-entity gltf-model="#spaceArm_gltf" 
                 position="-1 -5 -6" rotation="0 0 0"
@@ -350,6 +386,178 @@
                 });
 
               });
+
+          //----------------------------------------------------------------------------------
+          //----------------------------------------------------------------------------------
+          //----------------------------------------------------------------------------------
+          /* BEAKER PUZZLE*/
+        
+          
+          var currentPickedBeaker = null;
+          // In order to win
+          var targetCompounds = ['Ammonia (NH3)'];
+          var remainingAttempts = 3; // Number of attempts allowed
+
+
+          // Register pickup listener component
+          AFRAME.registerComponent('pickup-listener', {
+              init: function () {
+                  var el = this.el; // Current beaker element
+                  var self = this; // Component instance
+                
+                  el.addEventListener('click', function () {
+                      var currentBeakerId = el.getAttribute('id');
+                      console.log('Beaker picked up:', currentBeakerId);
+                    
+                      // Retrieve the chemical type based on the current beaker ID
+                      var chemicalType = getChemicalType(currentBeakerId);
+                      console.log('Chemical type:', chemicalType);
+                    
+                      // If no beaker is currently picked up, pick up the clicked beaker
+                      if (!currentPickedBeaker) {
+                          currentPickedBeaker = currentBeakerId;
+                      } else {
+                          // If a beaker is already picked up, mix chemicals
+                          if (currentPickedBeaker !== currentBeakerId) {
+                              console.log('Mixing chemicals from', currentPickedBeaker, 'and', currentBeakerId);
+                              mixChemicals(currentPickedBeaker, currentBeakerId);
+                          } else {
+                              console.log('Cannot pick up the same beaker twice.');
+            
+                          }
+                          currentPickedBeaker = null; // Reset the currently picked-up beaker
+                      }
+                  });
+            
+              }
+          });
+
+
+          // Function to determine chemical type based on beaker ID
+          function getChemicalType(beakerId) {
+              switch (beakerId) {
+                  case 'beaker1':
+                      return 'hydrogen';
+                  case 'beaker2':
+                      return 'oxygen';
+                  case 'beaker3':
+                      return 'nitrogen';
+                  default:
+                      return '';
+              }
+          }
+
+
+          // Function to mix chemicals from two beakers
+          function mixChemicals(beaker1Id, beaker2Id) {
+              var chemical1 = getChemicalType(beaker1Id);
+              var chemical2 = getChemicalType(beaker2Id);
+              console.log('Mixing chemicals from', beaker1Id, '(', chemical1, ') and', beaker2Id, '(', chemical2, ')');
+            
+              // store mixing
+              var mixedChemical;
+
+
+              // Check different combinations and perform corresponding mixing
+              if ((chemical1 === 'hydrogen' && chemical2 === 'oxygen') || (chemical1 === 'oxygen' && chemical2 === 'hydrogen')) {
+                  mixedChemical = 'Water (H2O)';
+              } else if ((chemical1 === 'oxygen' && chemical2 === 'nitrogen') || (chemical1 === 'nitrogen' && chemical2 === 'oxygen')) {
+                  mixedChemical = 'Nitrogen dioxide (NO2)';
+              } else if ((chemical1 === 'hydrogen' && chemical2 === 'nitrogen') || (chemical1 === 'nitrogen' && chemical2 === 'hydrogen')) {
+                  mixedChemical = 'Ammonia (NH3)';
+              } else {
+                  mixedChemical = 'Unknown';
+              }
+
+
+              console.log('Result of mixing:', mixedChemical);
+
+
+              // Check if the mixed chemical matches any of the target compounds
+              if (targetCompounds.includes(mixedChemical)) {
+                  console.log('Congratulations! You have successfully created', mixedChemical, '. You win!');
+                  // Choose a new random target compound if there are remaining attempts
+                  if (remainingAttempts > 1) {
+                      remainingAttempts--;
+              
+                  } else {
+                      console.log('No more attempts remaining. Game over.');
+                      // You can add further actions here for game over, like displaying a message or resetting the game
+                  }
+              
+              }
+          }
+
+
+
+
+          // Add the component to each beaker using their IDs
+          document.getElementById('beaker1').setAttribute('pickup-listener', '');
+          document.getElementById('beaker2').setAttribute('pickup-listener', '');
+          document.getElementById('beaker3').setAttribute('pickup-listener', '');
+
+
+          //----------------------------------------------------------------------------------
+          //----------------------------------------------------------------------------------
+          //----------------------------------------------------------------------------------
+          //COMPUTER PUZZLE
+          document.addEventListener('keydown', function(event) {
+            var passcode = "INNOVATE"; // Define your passcode here
+            var inputText = document.querySelector('#passcodeInput').getAttribute('text').value;
+          
+
+
+            // Ignore non-alphanumeric keys except for Backspace
+            if (!event.key.match(/^[a-zA-Z0-9]$/) && event.key !== "Backspace" && event.key !== "Enter") {
+              return;
+            }
+          
+            if (event.key !== "Enter") {
+              // Append characters to passcode until Enter is pressed
+              if (event.key === "Backspace") {
+                passcode = inputText.slice(0, -1);
+              } else {
+                passcode = inputText + event.key;
+              }
+            } else {
+              // Check if the entered passcode is correct
+              if (inputText === passcode) {
+                alert("Congratulations! You've entered the correct passcode.");
+              } else {
+                // Incorrect passcode, reset input field
+                alert("Incorrect passcode. Please try again.");
+                document.querySelector('#passcodeInput').setAttribute('text', 'value: Enter Passcode; color: #fff; width: 1.5; align: center; wrapCount: 15');
+                passcode = "";
+              }
+            }
+          
+            // Update passcode input field text
+            document.querySelector('#passcodeInput').setAttribute('text', 'value', passcode);
+          
+            // Update cursor position
+            var cursorPositionX = passcode.length + 0.75;
+            document.querySelector('#passcodeCursor').setAttribute('position', cursorPositionX + ' ' + cursorPositionY + ' -5');
+          });
+
+
+          AFRAME.registerComponent("click-log", {
+                  init: function() {
+                    this.myFunction = function() {
+                      console.log("hi");
+                    };
+
+
+                    this.el.addEventListener("click", this.myFunction);
+                  },
+
+
+                  remove: function() {
+                    this.el.removeEventListener("click", this.myFunction);
+                  }
+                });
+
+
+
         </script>
     
     </a-scene>

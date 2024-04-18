@@ -56,6 +56,18 @@
       <!-- Welcome/Intro/Instructions panel -->
         <a-entity id="podium" position="3 0.05 -8" rotation="0 180 0"
                   gltf-model="#podium_gltf" ></a-entity>
+        <a-entity id="welcomeTXT"
+                  position="3 2 -8" rotation="0 90 0" scale="1 1 1"
+                  geometry="primitive:octahedron; radius:0.25;"
+                  material="color:#f29f05; emissive:green; emissiveIntensity:0.7; metalness:0.3; roughness:0.8;" 
+                  circles-artefact="inspectPosition:0 0 0; inspectRotation:0 0 0; inspectScale:0.8 0.8 0.8;
+                                    textRotationY:90.0; labelLookAt:true; descriptionLookAt:true; label_offset:0.0 0.7 0.0; arrow_position:down;
+                                    title:Museum Mysteries;
+                                    description:Welcome to Museum Mysteries. There are 2 game modes\nStory Mode. Working at the Ingenium Innovation Lab, solve puzzles to earn your promotion\nCreative Mode. Learn more about the artifacts in Ingenium's collection and place them in your own exhibit room.;
+                                    title_back:Museum Mysteries;
+                                    description_back:Have Fun!;
+                                    label_text:Welcome Message;"
+                  circles-pickup-networked></a-entity>         
 
       <!-- ROOM ----------------------------------------------------------------------->
       <a-entity id="room">
