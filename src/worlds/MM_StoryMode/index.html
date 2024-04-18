@@ -22,9 +22,6 @@
     <!-- a-scene with 'circles-properties' component [REQUIRED] -->
     <a-scene circles_scene_properties>
 
-
-
-
       <a-camera position="0 1.6 0" rotation="0 0 0"></a-camera>
       <!-- assets -->
       <a-assets timeout="10000">
@@ -77,7 +74,7 @@
         <a-entity id="beaker1"
                     position="0 1.5 -12" rotation="0 0 0" scale="0.3 0.3 0.3"
                     geometry="primitive:cylinder; radiusTop: 0.3; radiusBottom: 0.4; height: 1.2; segmentsRadial: 20; openEnded: false;"
-                    material="color: #00FFFF; transparent: true; opacity: 0.8;"
+                    material="color: #FFFFFF; transparent: true; opacity: 0.8;"
                    
                     circles-artefact="inspectPosition:0 0 0; inspectRotation:0 0 0; inspectScale:0.8 0.8 0.8;
                                       textRotationY:90.0; labelLookAt:true; label_offset:0.0 1.0 0.0;  arrow_position:down;
@@ -95,7 +92,7 @@
         <a-entity id="beaker3"
                     position="2 1.5 -12" rotation="0 0 0" scale="0.3 0.3 0.3"
                     geometry="primitive:cylinder; radiusTop: 0.3; radiusBottom: 0.4; height: 1.2; segmentsRadial: 20; openEnded: false;"
-                    material="color: #0000FF; transparent: true; opacity: 0.8;"
+                    material="color: blue; transparent: true; opacity: 0.8;"
                     
                     circles-artefact="inspectPosition:0 0 0; inspectRotation:0 0 0; inspectScale:0.8 0.8 0.8;
                     label_offset:0.0 1.0 0.0;  arrow_position:down;
@@ -219,24 +216,19 @@
                     }
                 });
 
-                /*
-                document.querySelector('#phone').addEventListener('click', function(){
-                    socket.emit('introPhone');
-                    console.log('introPhone!');
-
-                    document.querySelector('#phone').setAttribute('position', '9.5 1 6')
-                });*/
-
-                /* BEAKER PUZZLE*/
+              
+/* BEAKER PUZZLE*/
  
-// Global variable to keep track of the currently picked-up beaker
 var currentPickedBeaker = null;
+// In order to win
+var targetCompounds = ['Ammonia (NH3)']; 
+var remainingAttempts = 3; // Number of attempts allowed
 
 // Register pickup listener component
 AFRAME.registerComponent('pickup-listener', {
     init: function () {
-        var el = this.el; // Reference to the current beaker element
-        var self = this; // Reference to the component instance
+        var el = this.el; // Current beaker element
+        var self = this; // Component instance
         
         el.addEventListener('click', function () {
             var currentBeakerId = el.getAttribute('id');
@@ -256,10 +248,12 @@ AFRAME.registerComponent('pickup-listener', {
                     mixChemicals(currentPickedBeaker, currentBeakerId);
                 } else {
                     console.log('Cannot pick up the same beaker twice.');
+    
                 }
                 currentPickedBeaker = null; // Reset the currently picked-up beaker
             }
         });
+    
     }
 });
 
@@ -298,8 +292,33 @@ function mixChemicals(beaker1Id, beaker2Id) {
     }
 
     console.log('Result of mixing:', mixedChemical);
-    
- 
+
+    // Check if the mixed chemical matches any of the target compounds
+    if (targetCompounds.includes(mixedChemical)) {
+        console.log('Congratulations! You have successfully created', mixedChemical, '. You win!');
+        // Choose a new random target compound if there are remaining attempts
+        if (remainingAttempts > 1) {
+            remainingAttempts--;
+            var newIndex = Math.floor(Math.random() * targetCompounds.length);
+            targetCompounds.splice(newIndex, 1);
+            console.log('New target compound:', targetCompounds[0]);
+        } else {
+            console.log('No more attempts remaining. Game over.');
+            // You can add further actions here for game over, like displaying a message or resetting the game
+        }
+        showWinVisual();
+    }
+}
+
+// Function to show a visual indication of winning
+function showWinVisual() {
+    var scene = document.querySelector('a-scene');
+    var winText = document.createElement('a-text');
+    winText.setAttribute('value', 'Congratulations! You win!');
+    winText.setAttribute('color', 'green');
+    winText.setAttribute('position', '0 3 -5');
+    winText.setAttribute('scale', '2 2 2');
+    scene.appendChild(winText);
 }
 
 // Add the component to each beaker using their IDs
@@ -310,12 +329,13 @@ document.getElementById('beaker3').setAttribute('pickup-listener', '');
 
  });
 
+ 
 //COMPUTER PUZZLE
 document.addEventListener('keydown', function(event) {
   var passcode = "INNOVATE"; // Define your passcode here
   var inputText = document.querySelector('#passcodeInput').getAttribute('text').value;
   
-  
+
   // Ignore non-alphanumeric keys except for Backspace
   if (!event.key.match(/^[a-zA-Z0-9]$/) && event.key !== "Backspace" && event.key !== "Enter") {
     return;
