@@ -61,18 +61,20 @@
 
       <!-- models -->
       <a-entity gltf-model="#CPUTerminal_gltf" 
-                position="-2.8 1 9" rotation="0 -90 0"
+                position="-2 1.05 -12.65" rotation="0 180 0"
                 shadow="cast:true; receive:true;"></a-entity>
       <a-entity id="phone"
                 gltf-model="#northernElectronicsTelephone_gltf"
                 position="1.9 1 -0.9" rotation="0 -90 0"
                 circles-pickup-networked
-                circles-artefact="inspectScale:1.2 1.2 1.2; textRotationY:0; inspectRotation:0 0 0; inspectPosition:0 -0.2 0;
-                                  label_offset:0 0.6 0; arrow_position:down;
-                                  title:Tools Unfamiliarity; 
-                                  description:'Walking into the lab the first day was exhilarating and terrifying. I’m excited to learn and get comfortable with the tools. But, it's next to impossible when I'm always paired with someone who takes over. I was never exposed to these tools as a child growing up.'';
-                                  title_back:Group Work;
-                                  description_back:Men usually go into tech. with a better understanding of tools such as this drill. However, women may not have had the same exposure. Though with positive intentions men taking over exercises with unfamiliar tools prevents women from learning.;
+
+                circles-artefact="inspectScale:1.2 1.2 1.2; textRotationY:90; inspectRotation:0 0 0; inspectPosition:0 -0.2 0;
+                                  label_offset:0 0.6 0;  labelLookAt:true; descriptionLookAt:true;  arrow_position:down;
+                                  title:Welcome To Your First Day On The Job; 
+                                  description:\nWelcome to your first day on the job! You need to clean the artifacts so we can put them on the floor ASAP! Email me when you’re finished with the job then you’re good to go. Good luck!;
+                                  title_back:Welcome To Your First Day On The Job;
+                                  description_back:\n Employee Status: New Hire;
+
                                   label_text:Pickup Telephone;
                                   audio:#Narr_welcome; volume:0.4;"
                 shadow="cast:true; receive:true;"></a-entity>  
@@ -163,18 +165,21 @@
         </a-entity>
       
       <!-- Text -->
-      <a-entity id="Welcome" position="9.5 2 5.5" scale="1 1 1" rotation="0 0 0" text="value: “Welcome to your first day on the job!\n You will need to clean the artifacts so we can put them on the floor ASAP!\n Email me when you are finished with the job then you are good to go\n Good luck!”; color: #fff; width: 1.7; wrapCount: 35; align: center; tabSize: 4.43; font: /worlds/KIN_Hub/assets/font/BebasNeue-Regular-msdf.json; negate: false; lineHeight: 60"></a-entity>
-      
+
+      <a-entity id="Welcome" position="2.25 2.5 1" scale="1.2 1.2 1.2" rotation="0 -90 0" text="value: “Story Mode - Solve Puzzles To Earn Your Promotion”; color: #fff; width: 1.7; wrapCount: 25; align: center; tabSize: 4.43; font: /worlds/KIN_Hub/assets/font/BebasNeue-Regular-msdf.json; negate: false; lineHeight: 60"></a-entity>
+      <a-entity id="Welcome" position="2.25 2 1" scale="1 1 1" rotation="0 -90 0" text="value: “Welcome to your first day on the job!\nPick up the telephone to get your task for the day\nIf you ever need help, grab a hint from the other wall”; color: #fff; width: 1.7; wrapCount: 45; align: center; tabSize: 4.43; font: /worlds/KIN_Hub/assets/font/BebasNeue-Regular-msdf.json; negate: false; lineHeight: 60"></a-entity>
+
       <!-- hints for computor password puzzle -->
-        <a-image src="#IngeniumLogo" position="-3 1.1 7.5" rotation="-80 -90 0"></a-image>
-        <a-image src="#hint01" position="-4 1.005 -12.4" rotation="-90 0 0" scale="2 0.5 1"></a-image>
-        <a-image src="#hint02" position="-9 0.005 0" rotation="-90 90 0" scale="10 2 1"></a-image>
-        <a-image id="hint01_img" src="#hint03" position="-2.55 0.8 -7.5" rotation="0 90 0" scale="2 0.2 2" visible="false"><!--2 0.5 1--></a-image>
+        <a-image id="passwordHint_img" src="#IngeniumLogo" position="-0.25 1.05 -12.65" rotation="-90 180 0" scale="1 0.5 1"></a-image>
+        <a-image id="hint01_img" src="#hint01" position="-4 1.005 -12.4" rotation="-90 0 0" scale="2 0.5 1"></a-image>
+        <a-image id="hint02_img" src="#hint02" position="-9 0.005 0" rotation="-90 90 0" scale="10 2 1"></a-image>
+        <a-image id="hint03_img" src="#hint03" position="4.95 1.1 -9.35" rotation="-90 -30 0" scale="1 1 1" visible="false"><!--2 0.5 1--></a-image>
 
       <!-- Portal to back to MM Hub --> 
         <a-entity id="backToHubTXT" 
-                  position="0 3.5 4" scale="1.5 1.5 1.5" rotation="0 180 0"
-                  text="value: Back To Hub; color: #f29f05; width: 3; wrapCount: 30; align: center; tabSize: 4.43; font: /worlds/KIN_Hub/assets/font/BebasNeue-Regular-msdf.json; negate: false; lineHeight: 60"></a-entity>
+                  position="0 3.5 2.5" scale="1.5 1.5 1.5" rotation="0 180 0"
+                  text="value: Back To Hub; color: #FFDD00; width: 3; wrapCount: 30; align: center; tabSize: 4.43; font: /worlds/KIN_Hub/assets/font/BebasNeue-Regular-msdf.json; negate: false; lineHeight: 60"></a-entity>
+
       <a-entity id="HubLink"
             position="0 2 4" rotation="0 90 0" scale="1 1 1"
             circles-portal="img_src:#hub360; title_text:Click me to be teleported; text_color:black; link_url:/w/MuseumMysteriesHub"></a-entity>
@@ -211,35 +216,96 @@
         <script src="/socket.io/socket.io.js"></script>
         <script>
           var isClean = 0;
-          var leftToClean = 15;
+
+          const toBeCleaned = 8;
+
           console.log(isClean);
             const socket = io();
 
             socket.on('connect', (userData) => {
                 console.log('I exist!');
 
-                document.querySelector('#dirtSpec_01').addEventListener('click', function(){
+
+                document.querySelector('#dirtSpec_11').addEventListener('click', function(){
                     console.log('I clean!');
                     isClean++;
                     console.log(isClean);
+                    if(isClean > toBeCleaned){
+                      console.log("cleaningFinished!");
+                      document.querySelector('#hint03_img').setAttribute('visible', true);
+                    }
+                });
+                document.querySelector('#dirtSpec_12').addEventListener('click', function(){
+                    console.log('I clean!');
+                    isClean++;
+                    console.log(isClean);
+                    if(isClean > toBeCleaned){
+                      console.log("cleaningFinished!");
+                      document.querySelector('#hint03_img').setAttribute('visible', true);
+                    }
+                });
+                document.querySelector('#dirtSpec_13').addEventListener('click', function(){
+                    console.log('I clean!');
+                    isClean++;
+                    console.log(isClean);
+                    if(isClean > toBeCleaned){
+                      console.log("cleaningFinished!");
+                      document.querySelector('#hint03_img').setAttribute('visible', true);
+                    }
+                });
 
-                    document.querySelector('#artefact-cleaningHint').setAttribute('description_back', "You have spots left to clean;");
+                document.querySelector('#dirtSpec_21').addEventListener('click', function(){
+                    console.log('I clean!');
+                    isClean++;
+                    console.log(isClean);
+                    if(isClean > toBeCleaned){
+                      console.log("cleaningFinished!");
+                      document.querySelector('#hint03_img').setAttribute('visible', true);
+                    }
+                });
+                document.querySelector('#dirtSpec_22').addEventListener('click', function(){
+                    console.log('I clean!');
+                    isClean++;
+                    console.log(isClean);
+                    if(isClean > toBeCleaned){
+                      console.log("cleaningFinished!");
+                      document.querySelector('#hint03_img').setAttribute('visible', true);
+                    }
+                });
+                document.querySelector('#dirtSpec_23').addEventListener('click', function(){
+                    console.log('I clean!');
+                    isClean++;
+                    console.log(isClean);
+                    if(isClean > toBeCleaned){
+                      console.log("cleaningFinished!");
+                      document.querySelector('#hint03_img').setAttribute('visible', true);
+                    }
+                });
+
 
                     if(isClean > 1){
                       console.log("cleaningFinished!");
-                      document.querySelector('#hint01_img').setAttribute('visible', true);
+                      document.querySelector('#hint03_img').setAttribute('visible', true);
                     }
                 });
                 document.querySelector('#dirtSpec_02').addEventListener('click', function(){
                     console.log('I clean!');
                     isClean++;
                     console.log(isClean);
-                    
-                    document.querySelector('#artefact-cleaningHint').setAttribute('description_back', "You have spots left to clean;");
 
-                    if(isClean > 1){
+                    if(isClean > toBeCleaned){
                       console.log("cleaningFinished!");
-                      document.querySelector('#hint01_img').setAttribute('visible', true);
+                      document.querySelector('#hint03_img').setAttribute('visible', true);
+                    }
+                });
+                document.querySelector('#dirtSpec_33').addEventListener('click', function(){
+                    console.log('I clean!');
+                    isClean++;
+                    console.log(isClean);
+                    if(isClean > toBeCleaned){
+
+                      console.log("cleaningFinished!");
+                      document.querySelector('#hint03_img').setAttribute('visible', true);
                     }
                 });
 
