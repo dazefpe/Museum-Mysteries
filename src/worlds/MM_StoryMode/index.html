@@ -10,6 +10,8 @@
     <script src="/worlds/KIN_FreeFall/components/physics-object.js"></script>
     <script src="/worlds/KIN_FreeFall/components/collision-indicator.js"></script>
     <script src="/worlds/KIN_FreeFall/scripts/experiment-functions.js"></script>
+
+
   </head>
 
   <body onload="setup()">
@@ -78,12 +80,17 @@
                 shadow="cast:true; receive:true;"></a-entity>  
       <a-entity obj-model="obj: #arm_obj; mtl: #arm_mtl"
                 position="-20 0.05 -1.7"
-                shadow="cast:true; receive:true;"></a-entity>  
-      <a-entity id="placeholdes">        
-        <a-entity id="artefact-gem"
-                    position="0 1.5 -12" rotation="0 0 0" scale="1 1 1"
-                    geometry="primitive:octahedron; radius:0.5;"
-                    material="color:blue; emissive:green; emissiveIntensity:0.7; metalness:0.3; roughness:0.8;" 
+                shadow="cast:true; receive:true;"></a-entity>
+                
+                
+      <a-entity id="placeholdes">  
+        
+        <!-- BEAKERS -->
+        <a-entity id="beaker1"
+                    position="0 1.5 -12" rotation="0 0 0" scale="0.3 0.3 0.3"
+                    geometry="primitive:cylinder; radiusTop: 0.3; radiusBottom: 0.4; height: 1.2; segmentsRadial: 20; openEnded: false;"
+                    material="color: #00FFFF; transparent: true; opacity: 0.8;"
+                   
                     circles-artefact="inspectPosition:0 0 0; inspectRotation:0 0 0; inspectScale:0.8 0.8 0.8;
                                       textRotationY:90.0; labelLookAt:true; descriptionLookAt:true; label_offset:0.0 1.0 0.0; arrow_position:down;
                                       title:[~20-25 chars] Title Front;
@@ -92,10 +99,11 @@
                                       description_back:[~240-280 chars] This is the back/secondary text that will display when you rotate the description bubble.;
                                       label_text:Placeholder: Beaker Puzzle Object;"
                     circles-pickup-networked></a-entity>    
-        <a-entity id="artefact-gem"
-                    position="-2 1.5 -12" rotation="0 0 0" scale="1 1 1"
-                    geometry="primitive:octahedron; radius:0.5;"
-                    material="color:blue; emissive:green; emissiveIntensity:0.7; metalness:0.3; roughness:0.8;" 
+        <a-entity id="beaker2"
+                    position="-2 1.5 -12" rotation="0 0 0" scale="0.3 0.3 0.3"
+                    geometry="primitive:cylinder; radiusTop: 0.3; radiusBottom: 0.4; height: 1.2; segmentsRadial: 20; openEnded: false;"
+                    material="color: #FF0000; transparent: true; opacity: 0.8;"
+                     
                     circles-artefact="inspectPosition:0 0 0; inspectRotation:0 0 0; inspectScale:0.8 0.8 0.8;
                                       textRotationY:90.0; labelLookAt:true; descriptionLookAt:true; label_offset:0.0 1.0 0.0; arrow_position:down;
                                       title:[~20-25 chars] Title Front;
@@ -104,10 +112,11 @@
                                       description_back:[~240-280 chars] This is the back/secondary text that will display when you rotate the description bubble.;
                                       label_text:Placeholder: Beaker Puzzle Object;"
                     circles-pickup-networked></a-entity> 
-        <a-entity id="artefact-gem"
-                    position="2 1.5 -12" rotation="0 0 0" scale="1 1 1"
-                    geometry="primitive:octahedron; radius:0.5;"
-                    material="color:blue; emissive:green; emissiveIntensity:0.7; metalness:0.3; roughness:0.8;" 
+        <a-entity id="beaker3"
+                    position="2 1.5 -12" rotation="0 0 0" scale="0.3 0.3 0.3"
+                    geometry="primitive:cylinder; radiusTop: 0.3; radiusBottom: 0.4; height: 1.2; segmentsRadial: 20; openEnded: false;"
+                    material="color: #0000FF; transparent: true; opacity: 0.8;"
+                    
                     circles-artefact="inspectPosition:0 0 0; inspectRotation:0 0 0; inspectScale:0.8 0.8 0.8;
                                       textRotationY:90.0; labelLookAt:true; descriptionLookAt:true; label_offset:0.0 1.0 0.0; arrow_position:down;
                                       title:[~20-25 chars] Title Front;
@@ -116,6 +125,9 @@
                                       description_back:[~240-280 chars] This is the back/secondary text that will display when you rotate the description bubble.;
                                       label_text:Placeholder: Beaker Puzzle Object;"
                     circles-pickup-networked></a-entity>  
+        
+
+
 
         <a-entity id="artefact-sewingMachine"
                     position="-3 1 -7.25" rotation="0 0 0" scale="1 1 1"
@@ -138,7 +150,9 @@
                     animation__mouseenter="property:material.color; type:color; to:#FFE78B; startEvents:mouseenter; dur:200"
                     animation__mouseleave="property:material.color; type:color; to:#FFD637; startEvents:mouseleave; dur:200"
                     animation__click="property:geometry.radius; from:0.04; to:0; startEvents:click; dur:300"></a-entity>    
-          </a-entity>          
+          </a-entity>
+          
+          
         <a-entity id="artefact-gem"
                     position="-3 1 -8.75" rotation="0 0 0" scale="1 1 1"
                     geometry="primitive:octahedron; radius:0.5;"
@@ -150,7 +164,7 @@
                     material="color:blue; emissive:green; emissiveIntensity:0.7; metalness:0.3; roughness:0.8;" 
                     gltf-model="#clock_gltf"
                     ></a-entity> 
-        </a-entity>
+      </a-entity>
       
       <!-- Text -->
       <a-entity id="Welcome" position="9.5 2 5.5" scale="1 1 1" rotation="0 0 0" text="value: “Welcome to your first day on the job!\n You will need to clean the artifacts so we can put them on the floor ASAP!\n Email me when you are finished with the job then you are good to go\n Good luck!”; color: #fff; width: 1.7; wrapCount: 35; align: center; tabSize: 4.43; font: /worlds/KIN_Hub/assets/font/BebasNeue-Regular-msdf.json; negate: false; lineHeight: 60"></a-entity>
@@ -235,8 +249,95 @@
 
                     document.querySelector('#phone').setAttribute('position', '9.5 1 6')
                 });*/
+
+                /* BEAKER PUZZLE*/
+ 
+// Global variable to keep track of the currently picked-up beaker
+var currentPickedBeaker = null;
+
+// Register pickup listener component
+AFRAME.registerComponent('pickup-listener', {
+    init: function () {
+        var el = this.el; // Reference to the current beaker element
+        var self = this; // Reference to the component instance
+        
+        el.addEventListener('click', function () {
+            var currentBeakerId = el.getAttribute('id');
+            console.log('Beaker picked up:', currentBeakerId);
+            
+            // Retrieve the chemical type based on the current beaker ID
+            var chemicalType = getChemicalType(currentBeakerId);
+            console.log('Chemical type:', chemicalType);
+            
+            // If no beaker is currently picked up, pick up the clicked beaker
+            if (!currentPickedBeaker) {
+                currentPickedBeaker = currentBeakerId;
+            } else {
+                // If a beaker is already picked up, mix chemicals
+                if (currentPickedBeaker !== currentBeakerId) {
+                    console.log('Mixing chemicals from', currentPickedBeaker, 'and', currentBeakerId);
+                    mixChemicals(currentPickedBeaker, currentBeakerId);
+                } else {
+                    console.log('Cannot pick up the same beaker twice.');
+                }
+                currentPickedBeaker = null; // Reset the currently picked-up beaker
+            }
+        });
+    }
+});
+
+// Function to determine chemical type based on beaker ID
+function getChemicalType(beakerId) {
+    switch (beakerId) {
+        case 'beaker1':
+            return 'hydrogen';
+        case 'beaker2':
+            return 'oxygen';
+        case 'beaker3':
+            return 'nitrogen';
+        default:
+            return ''; 
+    }
+}
+
+// Function to mix chemicals from two beakers
+function mixChemicals(beaker1Id, beaker2Id) {
+    var chemical1 = getChemicalType(beaker1Id);
+    var chemical2 = getChemicalType(beaker2Id);
+    console.log('Mixing chemicals from', beaker1Id, '(', chemical1, ') and', beaker2Id, '(', chemical2, ')');
+    
+    // store mixing
+    var mixedChemical;
+
+    // Check different combinations and perform corresponding mixing
+    if ((chemical1 === 'hydrogen' && chemical2 === 'oxygen') || (chemical1 === 'oxygen' && chemical2 === 'hydrogen')) {
+        mixedChemical = 'Water (H2O)';
+    } else if ((chemical1 === 'oxygen' && chemical2 === 'nitrogen') || (chemical1 === 'nitrogen' && chemical2 === 'oxygen')) {
+        mixedChemical = 'Nitrogen dioxide (NO2)';
+    } else if ((chemical1 === 'hydrogen' && chemical2 === 'nitrogen') || (chemical1 === 'nitrogen' && chemical2 === 'hydrogen')) {
+        mixedChemical = 'Ammonia (NH3)';
+    } else {
+        mixedChemical = 'Unknown'; 
+    }
+
+    console.log('Result of mixing:', mixedChemical);
+    
+ 
+}
+
+// Add the component to each beaker using their IDs
+document.getElementById('beaker1').setAttribute('pickup-listener', '');
+document.getElementById('beaker2').setAttribute('pickup-listener', '');
+document.getElementById('beaker3').setAttribute('pickup-listener', '');
+
+
               });
+
+     
+
         </script>
+
+        
     
     </a-scene>
 
