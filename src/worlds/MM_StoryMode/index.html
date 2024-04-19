@@ -10,6 +10,8 @@
     <script src="/worlds/KIN_FreeFall/components/physics-object.js"></script>
     <script src="/worlds/KIN_FreeFall/components/collision-indicator.js"></script>
     <script src="/worlds/KIN_FreeFall/scripts/experiment-functions.js"></script>
+
+    
   </head>
 
   <body onload="setup()">
@@ -62,48 +64,69 @@
       <circles-manager-avatar/>
 
       
+      <!--KEYBOARD-->
+      
 
   <!-- BEAKERS -->
         <a-entity id="beaker1"
-                    position="0 1.5 -12" rotation="0 0 0" scale="0.3 0.3 0.3"
+                    position="21.5 1.5 -8.85" rotation="0 0 0" scale="0.3 0.3 0.3"
                     geometry="primitive:cylinder; radiusTop: 0.3; radiusBottom: 0.4; height: 1.2; segmentsRadial: 20; openEnded: false;"
                     material="color: #FFFFFF; transparent: true; opacity: 0.8;"
                    
                     circles-artefact="inspectPosition:0 0 0; inspectRotation:0 0 0; inspectScale:0.8 0.8 0.8;
-                                      textRotationY:90.0; labelLookAt:true; label_offset:0.0 1.0 0.0;  arrow_position:down;
-                                      label_text: Hydrogen ;"
+                                      textRotationY:90.0; labelLookAt:true; label_offset:0.0 1.0 0.0;  arrow_position:down; labelLookAt:true; descriptionLookAt:true;  
+                                      label_text: Hydrogen;
+                                      title: Beaker Picked Up;
+                                      description: You have Hydrogen! Hydrogen is the lightest element.;
+                                     "
+                          
                     circles-pickup-networked></a-entity>    
         <a-entity id="beaker2"
-                    position="-2 1.5 -12" rotation="0 0 0" scale="0.3 0.3 0.3"
+                    position="21.5 1.5 -10.85" rotation="0 0 0" scale="0.3 0.3 0.3"
                     geometry="primitive:cylinder; radiusTop: 0.3; radiusBottom: 0.4; height: 1.2; segmentsRadial: 20; openEnded: false;"
                     material="color: #FF0000; transparent: true; opacity: 0.8;"
                      
                     circles-artefact="inspectPosition:0 0 0; inspectRotation:0 0 0; inspectScale:0.8 0.8 0.8;
-                    textRotationY:90.0; labelLookAt:true; label_offset:0.0 1.0 0.0;  arrow_position:down;
-                    label_text: Oxygen ;"
+                    textRotationY:90.0; labelLookAt:true; label_offset:0.0 1.0 0.0;  arrow_position:down; labelLookAt:true; descriptionLookAt:true;  
+                    label_text: Oxygen;
+                    title: Beaker Picked Up;
+                    description: You have Oxygen! Oxygen is a colourless, odorless gas.;
+                   "
+      
                     circles-pickup-networked></a-entity>
         <a-entity id="beaker3"
-                    position="2 1.5 -12" rotation="0 0 0" scale="0.3 0.3 0.3"
+                    position="21.5 1.5 -6.85" rotation="0 0 0" scale="0.3 0.3 0.3"
                     geometry="primitive:cylinder; radiusTop: 0.3; radiusBottom: 0.4; height: 1.2; segmentsRadial: 20; openEnded: false;"
                     material="color: blue; transparent: true; opacity: 0.8;"
                    
                     circles-artefact="inspectPosition:0 0 0; inspectRotation:0 0 0; inspectScale:0.8 0.8 0.8;
-                    label_offset:0.0 1.0 0.0;  arrow_position:down;
-                    label_text: Nitrogen;"
+                    label_offset:0.0 1.0 0.0;  arrow_position:down; labelLookAt:true; descriptionLookAt:true;  
+                    label_text: Nitrogen;
+                    title: Beaker Picked Up;
+                    description: You have Nitrogen! Nitrogen is a colourless, odorless gas.;
+                   "
                     circles-pickup-networked></a-entity>  
         <!--PUZZLE ENTITIES-->
         <!-- PASSCODE -->
-        <a-entity id="passcodeInput" click-log position="-3 1 -10.75" rotation="0 0 0" scale="1 1 1" text="value: Enter Passcode; color: #fff; width: 1.5; align: center; wrapCount: 15"></a-entity>
-        <a-entity id="passcodeCursor" click-log position="-3 1 -10.75" rotation="0 0 0" scale="1 1 1" text="value: |; color: #fff; width: 1.5; align: center;"></a-entity>
+        <a-entity id="passcodeInput" click-log position="-2 2.05 -12.65"rotation="0 180 0" scale="1 1 1" text="value: Enter Passcode; color: #fff; width: 1.5; align: center; wrapCount: 15"></a-entity>
+        <a-entity id="passcodeCursor" click-log position="-2 2.05 -12.65" rotation="0 180 0" scale="1 1 1" text="value: |; color: #fff; width: 1.5; align: center;"></a-entity>
 
+        <a-entity id="beakerInput" position="21.8 3.5 -7.5"rotation="0 -90 0" scale="1 1 1" text="value: Mix the elements to make Ammonia! (NH3); color: #fff; width: 1.5; align: center; wrapCount: 15"></a-entity>
+        <a-entity id="beakerElements" position="21.8 3.5 -9.5"rotation="0 -90 0" scale="1 1 1" text="value: ; color: #fff; width: 1.5; align: center; wrapCount: 15"></a-entity>
+
+        <a-entity id="passcodeWin" position="-2 3.05 -12.65"rotation="0 -90 0" scale="1 1 1" text="value: The beakers you mixed; color: #fff; width: 1.5; align: center; wrapCount: 15"></a-entity>
 
       <!-- models -->
       <a-entity gltf-model="#spaceArm_gltf" 
                 position="-1 -5 -6" rotation="0 0 0"
                 shadow="cast:true; receive:true;"></a-entity>
+
       <a-entity gltf-model="#CPUTerminal_gltf" 
-                position="-2 1.05 -12.65" rotation="0 180 0"
+                id ="CPUTerminal"
+                class="button interactive"
+                position="-2 1.05 -12.2" rotation="0 180 0"
                 shadow="cast:true; receive:true;"></a-entity>
+
       <a-entity id="phone"
                 gltf-model="#northernElectronicsTelephone_gltf"
                 position="1.5 1 -0.9" rotation="0 -90 0"
@@ -219,8 +242,32 @@
                                     title: Hint 01;
                                     description:Click on the coloured spheres to clean them off the artifacts;
                                     title_back: Hint 02;
-                                    description_back:There are 9 spots total to clean;
+                                    description_back:There are 9 spots total to clean. You may see something appear after cleaning.;
                                     label_text:Cleaning Hint;"
+                  circles-pickup-networked></a-entity>  
+                  <a-entity id="hint_Beakers"
+                  position="-2.25 1.5 2" rotation="0 90 0" scale="1 1 1"
+                  geometry="primitive:octahedron; radius:0.25;"
+                  material="color:#f29f05; emissive:green; emissiveIntensity:0.7; metalness:0.3; roughness:0.8;" 
+                  circles-artefact="inspectPosition:0 0 0; inspectRotation:0 0 0; inspectScale:0.8 0.8 0.8;
+                                    textRotationY:90.0; labelLookAt:true; descriptionLookAt:true; label_offset:0.0 1.0 0.0; arrow_position:down;
+                                    title: Hint 01;
+                                    description:Go interact with the beakers at the back of the room.;
+                                    title_back: Hint 02;
+                                    description_back:Ammonia is NH3. Can you mix the beakers to make the compound?;
+                                    label_text:Beakers Hint;"
+                  circles-pickup-networked></a-entity>  
+                  <a-entity id="hint_computer"
+                  position="-2.25 1.5 -2" rotation="0 90 0" scale="1 1 1"
+                  geometry="primitive:octahedron; radius:0.25;"
+                  material="color:#f29f05; emissive:green; emissiveIntensity:0.7; metalness:0.3; roughness:0.8;" 
+                  circles-artefact="inspectPosition:0 0 0; inspectRotation:0 0 0; inspectScale:0.8 0.8 0.8;
+                                    textRotationY:90.0; labelLookAt:true; descriptionLookAt:true; label_offset:0.0 1.0 0.0; arrow_position:down;
+                                    title: Hint 01;
+                                    description:The passcode hint is on the computer table(case sensitive!). Boy! It takes innovation to unscramble those words!;
+                                    title_back: Hint 02;
+                                    description_back:There's so many amazing museums run by Ingenium! You should take a look at their names writen around the room;
+                                    label_text:Computer Passcode Hint;"
                   circles-pickup-networked></a-entity>  
         </a-entity>
       
@@ -229,11 +276,10 @@
       <a-entity id="Welcome" position="2.25 2 1" scale="1 1 1" rotation="0 -90 0" text="value: “Welcome to your first day on the job!\nPick up the telephone to get your task for the day\nIf you ever need help, grab a hint from the other wall”; color: #fff; width: 1.7; wrapCount: 45; align: center; tabSize: 4.43; font: /worlds/KIN_Hub/assets/font/BebasNeue-Regular-msdf.json; negate: false; lineHeight: 60"></a-entity>
 
       <!-- hints for computor password puzzle -->
-        <a-image id="passwordHint_img" src="#IngeniumLogo" position="-0.25 1.05 -12.65" rotation="-90 180 0" scale="1 0.5 1"></a-image>
-        <a-image id="hint01_img" src="#hint01" position="-4 1.005 -12.4" rotation="-90 0 0" scale="2 0.5 1"></a-image>
-        <a-image id="hint02_img" src="#hint02" position="-9 0.005 0" rotation="-90 90 0" scale="10 2 1"></a-image>
-        <a-image id="hint03_img" src="#hint03" position="4.95 1.1 -9.35" rotation="-90 -30 0" scale="1 1 1" visible="false"><!--2 0.5 1--></a-image>
-
+        <a-image id="passwordHint_img" src="#IngeniumLogo" position="-0.25 1.05 -12.65" rotation="-90 180 0" scale="1 0.5 1" visible="true"></a-image>
+        <a-image id="hint01_img" src="#hint01" position="7 0.9 -15" rotation="0 0 0" scale="1.2 0.4 1.2" visible="true"></a-image>
+        <a-image id="hint03_img" src="#hint03" position="4.95 1.1 -9.35" rotation="-90 -30 0" scale="1 0.2 1" visible="false"></a-image>
+        <a-image id="hint02_img" src="#hint02" position="20.8 0.65 -10.75" rotation=" 0 -90 0" scale="1 0.2 1" visible="false"></a-image>
       <!-- Portal to back to MM Hub --> 
         <a-entity id="backToHubTXT" 
                   position="0 3.5 2.5" scale="1.5 1.5 1.5" rotation="0 180 0"
@@ -387,12 +433,12 @@
 
               });
 
-          //----------------------------------------------------------------------------------
-          //----------------------------------------------------------------------------------
-          //----------------------------------------------------------------------------------
+     
           /* BEAKER PUZZLE*/
         
-          
+          var inputText = document.querySelector('#beakerInput').getAttribute('text').value;
+          var inputText = document.querySelector('#beakerElements').getAttribute('text').value;
+
           var currentPickedBeaker = null;
           // In order to win
           var targetCompounds = ['Ammonia (NH3)'];
@@ -420,6 +466,7 @@
                           // If a beaker is already picked up, mix chemicals
                           if (currentPickedBeaker !== currentBeakerId) {
                               console.log('Mixing chemicals from', currentPickedBeaker, 'and', currentBeakerId);
+
                               mixChemicals(currentPickedBeaker, currentBeakerId);
                           } else {
                               console.log('Cannot pick up the same beaker twice.');
@@ -453,7 +500,8 @@
               var chemical1 = getChemicalType(beaker1Id);
               var chemical2 = getChemicalType(beaker2Id);
               console.log('Mixing chemicals from', beaker1Id, '(', chemical1, ') and', beaker2Id, '(', chemical2, ')');
-            
+              document.querySelector('#beakerInput').setAttribute('text', 'value','Mix the elements to make Ammonia! NH3');
+
               // store mixing
               var mixedChemical;
 
@@ -461,10 +509,16 @@
               // Check different combinations and perform corresponding mixing
               if ((chemical1 === 'hydrogen' && chemical2 === 'oxygen') || (chemical1 === 'oxygen' && chemical2 === 'hydrogen')) {
                   mixedChemical = 'Water (H2O)';
+                  document.querySelector('#beakerElements').setAttribute('text', 'value','You made Water! H20');
+
               } else if ((chemical1 === 'oxygen' && chemical2 === 'nitrogen') || (chemical1 === 'nitrogen' && chemical2 === 'oxygen')) {
                   mixedChemical = 'Nitrogen dioxide (NO2)';
+                  document.querySelector('#beakerElements').setAttribute('text', 'value','Nitrogen dioxide (NO2)');
+
               } else if ((chemical1 === 'hydrogen' && chemical2 === 'nitrogen') || (chemical1 === 'nitrogen' && chemical2 === 'hydrogen')) {
                   mixedChemical = 'Ammonia (NH3)';
+                  document.querySelector('#beakerElements').setAttribute('text', 'value','Ammonia (NH3)');
+
               } else {
                   mixedChemical = 'Unknown';
               }
@@ -476,6 +530,7 @@
               // Check if the mixed chemical matches any of the target compounds
               if (targetCompounds.includes(mixedChemical)) {
                   console.log('Congratulations! You have successfully created', mixedChemical, '. You win!');
+                  document.querySelector('#hint02_img').setAttribute('visible', true);
                   // Choose a new random target compound if there are remaining attempts
                   if (remainingAttempts > 1) {
                       remainingAttempts--;
@@ -496,67 +551,69 @@
           document.getElementById('beaker2').setAttribute('pickup-listener', '');
           document.getElementById('beaker3').setAttribute('pickup-listener', '');
 
-
-          //----------------------------------------------------------------------------------
-          //----------------------------------------------------------------------------------
-          //----------------------------------------------------------------------------------
           //COMPUTER PUZZLE
-          document.addEventListener('keydown', function(event) {
-            var passcode = "INNOVATE"; // Define your passcode here
-            var inputText = document.querySelector('#passcodeInput').getAttribute('text').value;
-          
 
+          var typingEnabled = false;
 
-            // Ignore non-alphanumeric keys except for Backspace
-            if (!event.key.match(/^[a-zA-Z0-9]$/) && event.key !== "Backspace" && event.key !== "Enter") {
-              return;
-            }
-          
-            if (event.key !== "Enter") {
-              // Append characters to passcode until Enter is pressed
-              if (event.key === "Backspace") {
-                passcode = inputText.slice(0, -1);
-              } else {
-                passcode = inputText + event.key;
-              }
-            } else {
-              // Check if the entered passcode is correct
-              if (inputText === passcode) {
-                alert("Congratulations! You've entered the correct passcode.");
-              } else {
-                // Incorrect passcode, reset input field
-                alert("Incorrect passcode. Please try again.");
-                document.querySelector('#passcodeInput').setAttribute('text', 'value: Enter Passcode; color: #fff; width: 1.5; align: center; wrapCount: 15');
-                passcode = "";
-              }
-            }
-          
-            // Update passcode input field text
-            document.querySelector('#passcodeInput').setAttribute('text', 'value', passcode);
-          
-            // Update cursor position
-            var cursorPositionX = passcode.length + 0.75;
-            document.querySelector('#passcodeCursor').setAttribute('position', cursorPositionX + ' ' + cursorPositionY + ' -5');
-          });
+          var inputText = document.querySelector('#passcodeWin').getAttribute('text').value;
 
+document.querySelector('#CPUTerminal').addEventListener('click', function(){
+    console.log('Computer clicked');
+    typingEnabled = true;
+    setTimeout(function() {
+        typingEnabled = false;
+        console.log('Typing disabled');
+    }, 10000); // Disable typing after 10 seconds
+});
 
-          AFRAME.registerComponent("click-log", {
-                  init: function() {
-                    this.myFunction = function() {
-                      console.log("hi");
-                    };
+document.addEventListener('keydown', function(event) {
+    if (!typingEnabled) {
+        console.log('Typing is disabled');
+        return;
+    }
 
+    var passcode = "INNOVATE"; // Define your passcode here
+    var inputText = document.querySelector('#passcodeInput').getAttribute('text').value;
 
-                    this.el.addEventListener("click", this.myFunction);
-                  },
+    // Ignore non-alphanumeric keys except 
+    if (!event.key.match(/^[a-zA-Z0-9]$/) && event.key !== "Backspace" && event.key !== "Enter") {
+        return;
+    }
 
+    // Ignore specific keys 'w' and 'd'
+    if (event.key === "w" || event.key === "d") {
+        event.preventDefault();
+        return;
+    }
 
-                  remove: function() {
-                    this.el.removeEventListener("click", this.myFunction);
-                  }
-                });
+    if (event.key !== "Enter") {
+        // Append characters to passcode until Enter is pressed
+        if (event.key === "Backspace") {
+            passcode = inputText.slice(0, -1);
+        } else {
+            passcode = inputText + event.key;
+        }
+    } else {
+        // Check if the entered passcode is correct
+        if (inputText === passcode) {
+           alert("Congratulations! You did a great job tidying up! You've now been promoted to Ingenium Innovator");
+            document.querySelector('#passcodeWin').setAttribute('text', 'value: Congratulations! Youve entered the correct passcode; color: #fff; width: 1.5; align: center; wrapCount: 15');
 
+        } else {
+            // Incorrect passcode, reset input field
+            alert("Incorrect passcode. Please try again.");
+            document.querySelector('#passcodeInput').setAttribute('text', 'value: Enter Passcode; color: #fff; width: 1.5; align: center; wrapCount: 15');
+            passcode = "";
+        }
+    }
 
+    // Update passcode input field text
+    document.querySelector('#passcodeInput').setAttribute('text', 'value', passcode);
+
+    // Update cursor position
+    var cursorPositionX = passcode.length + 0.75;
+    document.querySelector('#passcodeCursor').setAttribute('position', cursorPositionX + ' ' + cursorPositionY + ' -5');
+});
 
         </script>
     
